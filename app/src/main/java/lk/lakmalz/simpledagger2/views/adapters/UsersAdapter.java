@@ -24,9 +24,11 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserHolder> 
 
     private Context mContext;
     private List<User> mDataSet;
+    private UsersAdapterListener mListener;
 
     public UsersAdapter(Context context) {
         mContext = context;
+        mListener = (UsersAdapterListener) context;
         mDataSet = new ArrayList<>();
     }
 
@@ -71,7 +73,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserHolder> 
         return mDataSet == null ? 0 : mDataSet.size();
     }
 
-    public class UserHolder extends RecyclerView.ViewHolder {
+    public class UserHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         @BindView(R.id.tv_user_name)
         TextView tvUserName;
@@ -79,6 +81,12 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserHolder> 
         public UserHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            mListener.onClickUserItem(mDataSet.get(getAdapterPosition()).getLogin());
         }
     }
 

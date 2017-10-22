@@ -33,7 +33,7 @@ public class NetworkAccess {
 
     public boolean isConnected() {
         if (mConnectivityManager.getActiveNetworkInfo() != null && mConnectivityManager.getActiveNetworkInfo().isConnected()) {
-            Toast.makeText(mContext, "Connected", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(mContext, "Connected", Toast.LENGTH_SHORT).show();
             return true;
         } else {
             Toast.makeText(mContext, "No internet connection", Toast.LENGTH_SHORT).show();

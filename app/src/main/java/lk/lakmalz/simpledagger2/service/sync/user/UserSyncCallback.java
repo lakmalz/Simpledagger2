@@ -11,7 +11,16 @@ import lk.lakmalz.simpledagger2.model.User;
 
 public interface UserSyncCallback {
 
-    void onSuccessGetUserList(List<User> userList);
+    interface GetUserListCallBack {
+        void onSuccessGetUserList(List<User> userList);
 
-    void onFailureGetUserList(String message);
+        void onFailureGetUserList(String message);
+    }
+
+    interface GetUserDetailsCallBack {
+        void onSuccessGetUserDetails(User user);
+
+        void onFailureGetUserDetails(String message);
+
+    }
 }

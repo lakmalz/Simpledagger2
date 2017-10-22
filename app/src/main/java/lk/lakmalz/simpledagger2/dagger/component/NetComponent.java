@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import lk.lakmalz.simpledagger2.dagger.module.ContextModule;
+import lk.lakmalz.simpledagger2.views.activities.DetailActivity;
 import lk.lakmalz.simpledagger2.views.activities.MainActivity;
 import lk.lakmalz.simpledagger2.dagger.module.AppModule;
 import lk.lakmalz.simpledagger2.dagger.module.NetModule;
@@ -16,4 +17,5 @@ import lk.lakmalz.simpledagger2.dagger.module.NetModule;
 @Component(modules = {AppModule.class, ContextModule.class, NetModule.class})
 public interface NetComponent {
     void inject(MainActivity activity);
+    void inject(DetailActivity activity);
 }

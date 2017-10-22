@@ -17,8 +17,9 @@ import lk.lakmalz.simpledagger2.service.RestAPI;
 import lk.lakmalz.simpledagger2.service.sync.user.UserSync;
 import lk.lakmalz.simpledagger2.service.sync.user.UserSyncCallback;
 import lk.lakmalz.simpledagger2.views.adapters.UsersAdapter;
+import lk.lakmalz.simpledagger2.views.adapters.UsersAdapterListener;
 
-public class MainActivity extends BaseActivity implements UserSyncCallback {
+public class MainActivity extends BaseActivity implements UserSyncCallback.GetUserListCallBack , UsersAdapterListener{
 
     @BindView(R.id.rv_user_list)
     RecyclerView rvUserList;
@@ -65,7 +66,7 @@ public class MainActivity extends BaseActivity implements UserSyncCallback {
     private void getUserList(int _currentPage) {
         showProgress();
         isLoading = true;
-        mUserSync.getUserList(_currentPage, perPage);
+        mUserSync.getUserList(this, _currentPage, perPage);
     }
 
     @Override
@@ -110,4 +111,8 @@ public class MainActivity extends BaseActivity implements UserSyncCallback {
         }
     };
 
+    @Override
+    public void onClickUserItem(String userName) {
+        startActivity(DetailActivity.getInstance(this, userName));
+    }
 }

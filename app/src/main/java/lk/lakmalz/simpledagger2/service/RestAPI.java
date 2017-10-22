@@ -5,6 +5,7 @@ import java.util.List;
 import lk.lakmalz.simpledagger2.model.User;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -18,4 +19,7 @@ public interface RestAPI {
     Call<List<User>> getUsers(
             @Query("page") int page,
             @Query("per_page") int per_page);
+
+    @GET("/users/{user_name}")
+    Call<User> getUserDetails(@Path("user_name") String userName);
 }

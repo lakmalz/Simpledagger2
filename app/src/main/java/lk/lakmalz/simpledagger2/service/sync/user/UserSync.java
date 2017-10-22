@@ -22,18 +22,16 @@ public class UserSync {
 
     Context mContext;
     RestAPI mRestAPI;
-    private UserSyncCallback mCallback;
 
     public UserSync(Context context, RestAPI restAPI) {
         mContext = context;
         mRestAPI = restAPI;
-        mCallback = (UserSyncCallback) context;
     }
 
-    public void getUserList(int page, int perPage) {
+    public void getUserList(final UserSyncCallback.GetUserListCallBack callBack, int page, int perPage) {
 
         if (!NetworkAccess.create(mContext).isConnected()) {
-            mCallback.onFailureGetUserList(null);
+            callBack.onFailureGetUserList(null);
             return;
         }
 
@@ -41,17 +39,40 @@ public class UserSync {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if (response.isSuccessful()) {
-                    mCallback.onSuccessGetUserList(response.body());
+                    callBack.onSuccessGetUserList(response.body());
                 } else {
-                    mCallback.onFailureGetUserList("Request Failed. Please try again.");
+                    callBack.onFailureGetUserList("Request Failed. Please try again.");
                 }
             }
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
-                mCallback.onFailureGetUserList("Request Failed. Please try again.");
+                callBack.onFailureGetUserList("Request Failed. Please try again.");
             }
         });
     }
 
+    public void getUserDetails(final UserSyncCallback.GetUserDetailsCallBack callBack, String userName) {
+
+        if (!NetworkAccess.create(mContext).isConnected()) {
+            callBack.onFailureGetUserDetails(null);
+            return;
+        }
+
+        mRestAPI.getUserDetails(userName).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    callBack.onSuccessGetUserDetails(response.body());
+                } else {
+                    callBack.onFailureGetUserDetails("Request Failed. Please try again.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                callBack.onFailureGetUserDetails("Request Failed. Please try again.");
+            }
+        });
+    }
 }
