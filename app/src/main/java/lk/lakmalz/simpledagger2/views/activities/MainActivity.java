@@ -24,9 +24,6 @@ public class MainActivity extends BaseActivity implements UserSyncCallback.GetUs
     @BindView(R.id.rv_user_list)
     RecyclerView rvUserList;
 
-    @Inject
-    RestAPI mRestAPI;
-
     private UserSync mUserSync;
     private LinearLayoutManager mLinearLayoutManager;
     private UsersAdapter mUserAdapter;
@@ -40,7 +37,6 @@ public class MainActivity extends BaseActivity implements UserSyncCallback.GetUs
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        ((App) getApplication()).getNetComponent().inject(this);
         init();
 
     }

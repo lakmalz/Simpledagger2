@@ -33,9 +33,6 @@ public class DetailActivity extends BaseActivity implements UserSyncCallback.Get
     @BindView(R.id.tv_user_name)
     TextView tvUserName;
 
-    @Inject
-    RestAPI mRestAPI;
-
     private String userName;
     private UserSync mUserSync;
 
@@ -44,7 +41,6 @@ public class DetailActivity extends BaseActivity implements UserSyncCallback.Get
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         ButterKnife.bind(this);
-        ((App) getApplication()).getNetComponent().inject(this);
 
         init();
     }
