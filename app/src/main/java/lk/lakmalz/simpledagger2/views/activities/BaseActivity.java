@@ -19,7 +19,7 @@ import lk.lakmalz.simpledagger2.service.RestAPI;
 
 public class BaseActivity extends AppCompatActivity {
     public Context mContext;
-    private ProgressDialog mProgressDailog;
+    private ProgressDialog mProgressDialog;
 
     @Inject
     RestAPI mRestAPI;
@@ -33,19 +33,19 @@ public class BaseActivity extends AppCompatActivity {
 
     private void init() {
         mContext = this;
-        mProgressDailog = new ProgressDialog(this);
-        mProgressDailog.setMessage("Please wait...");
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage("Please wait...");
     }
 
     protected void showProgress() {
-        if (mProgressDailog != null) {
-            mProgressDailog.show();
+        if (mProgressDialog != null) {
+            mProgressDialog.show();
         }
     }
 
     protected void dismissProgress() {
-        if (mProgressDailog != null) {
-            mProgressDailog.dismiss();
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
         }
     }
 
